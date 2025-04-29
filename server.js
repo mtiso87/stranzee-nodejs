@@ -214,8 +214,9 @@ connection.once("open", () => {
   );
 
   app.post("/signup", upload.single("profileImage"), (req, res) => {
+     console.log("SIGNUP request received");
     req.body.email = req.body.email.toLowerCase();
-
+    
     if (req.body.password.length < 6) {
       return res.status(500).json({
         error: "Password must be 6 characters or more",

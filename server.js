@@ -26,6 +26,11 @@ const emailContent = fs.readFileSync(
   "utf8"
 );
 
+app.get('/', (req, res) => {
+  res.send('API is running...');
+});
+
+
 const serviceAccount = {
   type: "service_account",
   project_id: process.env.FIREBASE_PROJECT_ID,

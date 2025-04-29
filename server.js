@@ -8,16 +8,18 @@ const ejs = require("ejs");
 const fs = require("fs");
 const path = require("path");
 const nodemailer = require("nodemailer");
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.GMAIL,
+    pass: process.env.GMAIL_PASSWORD,
+  },
+});
 var admin = require("firebase-admin");
 const uuid = require("uuid-v4");
 const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
-const mailgun = require("mailgun-js")({
-  apiKey: process.env.MAILGUN_API_KEY,
-  domain: process.env.MAILGUN_DOMAIN,
-});
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // app.use("/uploads", express.static("uploads"));

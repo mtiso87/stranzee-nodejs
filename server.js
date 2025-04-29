@@ -53,25 +53,6 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-const mailOptions = {
-  from: `${process.env.APP_NAME} <${process.env.GMAIL}>`,
-  to: req.query.email,
-  subject: `Password reset link for ${process.env.APP_NAME}`,
-  html: emailTemplate,
-};
-
-transporter.sendMail(mailOptions, (erro, info) => {
-  if (erro) {
-    console.log("Mail send error:", erro);
-    res.status(200).json({ userFound: true, emailSent: false });
-  } else {
-    res.status(200).json({ userFound: true, emailSent: true });
-  }
-});
-
-
-
-
 
 const saltRounds = 10;
 const FIND_STRANGEE_PAGINATION = 30;

@@ -8,13 +8,6 @@ const ejs = require("ejs");
 const fs = require("fs");
 const path = require("path");
 const nodemailer = require("nodemailer");
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.GMAIL,
-    pass: process.env.GMAIL_PASSWORD,
-  },
-});
 var admin = require("firebase-admin");
 const uuid = require("uuid-v4");
 const app = express();
@@ -59,6 +52,27 @@ const transporter = nodemailer.createTransport({
     pass: process.env.GMAIL_PASSWORD,
   },
 });
+
+const mailOptions = {
+  from: `${process.env.APP_NAME} <${process.env.GMAIL}>`,
+  to: req.query.email,
+  subject: `Password reset link for ${process.env.APP_NAME}`,
+  html: emailTemplate,
+};
+
+transporter.sendMail(mailOptions, (erro, info) => {
+  if (erro) {
+    console.log("Mail send error:", erro);
+    res.status(200).json({ userFound: true, emailSent: false });
+  } else {
+    res.status(200).json({ userFound: true, emailSent: true });
+  }
+});
+
+
+
+
+
 const saltRounds = 10;
 const FIND_STRANGEE_PAGINATION = 30;
 const FIND_STRANGEE_AGE_RADIUS = 10 * 365 * 86400 * 1000;

@@ -1075,7 +1075,7 @@ connection.once("open", () => {
             resetLink: link,
           });
 
-          /* 
+           
           // For gmail
           const mailOptions = {
             from: `${process.env.APP_NAME} <${process.env.GMAIL}>`, // Something like: Jane Doe <janedoe@gmail.com>
@@ -1097,8 +1097,8 @@ connection.once("open", () => {
                 emailSent: true,
               });
             }
-          }); */
-
+          }); 
+ /* 
           // For Mailgun
           const data = {
             from: `${process.env.APP_NAME} <${process.env.MAILGUN_EMAIL}>`,
@@ -1122,7 +1122,7 @@ connection.once("open", () => {
               });
             }
           });
-
+*/
         } else {
           res.status(200).json({
             userFound: false,
